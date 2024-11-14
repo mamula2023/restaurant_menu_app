@@ -1,11 +1,12 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from restaurant.views import RestaurantListView, CategoryListView
+from restaurant.views import RestaurantViewSet, CategoryViewSet, SubCategoryViewSet, SubCategoryDetailedListView
 
 router = DefaultRouter()
-
+router.register('restaurants', RestaurantViewSet)
+router.register('categories', CategoryViewSet)
+router.register('subcategories', SubCategoryViewSet)
 urlpatterns = [
-    path('restaurants/', RestaurantListView.as_view(), name='restaurant-list'),
-    path('categories/', CategoryListView.as_view(), name='category-list'),
+    path('', include(router.urls)),
 ]
