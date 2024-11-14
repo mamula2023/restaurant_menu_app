@@ -15,7 +15,7 @@ class Restaurant(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=100)
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    restaurant = models.ManyToManyField(Restaurant, related_name='category')
 
     def __str__(self):
         return self.title
@@ -23,7 +23,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     title = models.CharField(max_length=100)
-    parent = models.ForeignKey(Category, on_delete=models.CASCADE)
+    parent = models.ForeignKey(Category, related_name='subcategories', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/')
 
     def __str__(self):
@@ -42,7 +42,7 @@ class Dish(models.Model):
 
 class Ingredient(models.Model):
     title = models.CharField(max_length=100)
-    dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
+    dish = models.ManyToManyField(Dish, related_name='ingredients')
 
     def __str__(self):
         return self.title
