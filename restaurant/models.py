@@ -7,7 +7,7 @@ class Restaurant(models.Model):
     title = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', blank=True, default='images/default.jpg')
 
     def __str__(self):
         return self.title
@@ -24,7 +24,7 @@ class Category(models.Model):
 class SubCategory(models.Model):
     title = models.CharField(max_length=100)
     parent = models.ForeignKey(Category, related_name='subcategories', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', blank=True, default='images/default.jpg')
 
     def __str__(self):
         return self.title
@@ -32,7 +32,7 @@ class SubCategory(models.Model):
 
 class Dish(models.Model):
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', blank=True, default='images/default.jpg')
     price = models.FloatField()
     category = models.CharField(max_length=100)
 
